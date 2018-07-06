@@ -10,12 +10,12 @@ CREATE TABLE `items` (
   `item_url` varchar(1024) NOT NULL COMMENT '商品url',
   `item_name` varchar(100) NOT NULL COMMENT '商品名称',
   `item_shop` varchar(100) DEFAULT NULL COMMENT '店铺名',
-  `item_price` decimal DEFAULT NULL COMMENT '商品价格',
+  `item_price` DOUBLE DEFAULT NULL COMMENT '商品价格',
   `item_sale_num` int DEFAULT NULL COMMENT '商品销量',
   `item_comment_num` int DEFAULT NULL COMMENT '商品评论数',
   `item_stock` int  DEFAULT NULL COMMENT '商品库存',
-  `item_detail` varchar(9012) DEFAULT NULL COMMENT '商品描述',
-  `item_area` varchar(30)  NOT NULL COMMENT '商品所在地区',
+  `item_detail` varchar(20000) DEFAULT NULL COMMENT '商品描述',
+  `item_area` varchar(300)  NOT NULL COMMENT '商品所在地区',
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
