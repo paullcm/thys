@@ -25,6 +25,16 @@ public class Items  implements java.io.Serializable{
     @Id
     private String itemId;
     /**
+     * 爬取时间
+     */
+    @Column(name="item_time")
+    private Date itemTime;
+    /**
+     * 商品url
+     */
+    @Column(name="item_url")
+    private String itemUrl;
+    /**
      * 商品名称
      */
     @Column(name="item_name")
@@ -38,7 +48,7 @@ public class Items  implements java.io.Serializable{
      * 商品价格
      */
     @Column(name="item_price")
-    private Long itemPrice;
+    private Double itemPrice;
     /**
      * 商品销量
      */
@@ -74,6 +84,22 @@ public class Items  implements java.io.Serializable{
         return this.itemId;
     }
 
+    public void setItemTime(Date itemTime) {
+        this.itemTime = itemTime;
+    }
+
+    public Date getItemTime() {
+        return this.itemTime;
+    }
+
+    public void setItemUrl(String itemUrl) {
+        this.itemUrl = itemUrl;
+    }
+
+    public String getItemUrl() {
+        return this.itemUrl;
+    }
+
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
@@ -90,11 +116,11 @@ public class Items  implements java.io.Serializable{
         return this.itemShop;
     }
 
-    public void setItemPrice(Long itemPrice) {
+    public void setItemPrice(Double itemPrice) {
         this.itemPrice = itemPrice;
     }
 
-    public Long getItemPrice() {
+    public Double getItemPrice() {
         return this.itemPrice;
     }
 
