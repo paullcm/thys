@@ -198,6 +198,8 @@ public class SimpleExcel {
 		return commentsList;
 	}
 	private int getCmType(String cm) {
+		if(cm==null)return 1;
+		
 		if(cm.equals("好评")){
 			return 1;
 		}else if(cm.equals("中评")){
