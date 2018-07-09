@@ -14,7 +14,7 @@ CREATE TABLE `items` (
   `item_sale_num` int DEFAULT NULL COMMENT '商品销量',
   `item_comment_num` int DEFAULT NULL COMMENT '商品评论数',
   `item_stock` int  DEFAULT NULL COMMENT '商品库存',
-  `item_detail` varchar(20000) DEFAULT NULL COMMENT '商品描述',
+  `item_detail` text DEFAULT NULL COMMENT '商品描述',
   `item_area` varchar(300)  NOT NULL COMMENT '商品所在地区',
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -24,7 +24,7 @@ public class SimpleExcel {
     public void read() throws Exception{ 
     	   XSSFWorkbook book = new XSSFWorkbook("E:/works/神箭手/crawler-data-1982230-1530845146393.xlsx");
            SqlUtils sql=new SqlUtils();
-           sql.init("jdbc:mysql://192.168.10.6:3306/crawler?useUnicode=true&amp;characterEncoding=UTF-8", "root", "ChangeMe");
+           sql.init("jdbc:mysql://192.168.21.201:3306/crawler?useUnicode=true&amp;characterEncoding=UTF-8", "root", "root");
            XSSFSheet sheet = book.getSheetAt(0);
            int row = 1;
            
@@ -34,7 +34,7 @@ public class SimpleExcel {
         	   List<Pictures> pictureslist= new ArrayList<Pictures>();
         	   List<Comments> commentslist= new ArrayList<Comments>();
         	   
-        	   for (int counter = 0; counter <10 && row < sheet.getLastRowNum(); counter++) {				
+        	   for (int counter = 0; counter <1 && row < sheet.getLastRowNum(); counter++) {				
         		       int col = 0;
 		        	   XSSFRow xlsrow = sheet.getRow(row); 
 		        	   Items item= new Items();
@@ -85,6 +85,7 @@ public class SimpleExcel {
 		        	   } 
 		        	   {
 			        	   String tmp =xlsrow.getCell(col++).getStringCellValue();
+			        	   item.setItemDetail(tmp);
 			        	   List<Pictures> pictures=getPictures(tmp);
 			        	   for (int i = 0; i < pictures.size(); i++) {
 			        		   pictures.get(i).setItemId(item.getItemId());					
