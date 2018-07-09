@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -142,4 +148,69 @@ public class SqlUtils {
 		}
 		return row;
 	}
+	
+	
+	public void query(String sql,RowCallBack cb) throws Exception{
+ 
+		Statement stmt = null;
+		ResultSet set = null;
+		 
+		try { 
+			stmt = conn.createStatement();
+			set = stmt.executeQuery(sql);
+			ResultSetMetaData metaData = set.getMetaData();
+			int cols = metaData.getColumnCount();
+			String[] colNames = new String[cols];
+			for (int i = 1; i <= cols; i++) {
+				colNames[i - 1] = metaData.getColumnName(i).toLowerCase();
+			}
+			while (set.next()) {
+				HashMap bean = new LinkedHashMap();
+				for (int i = 1; i <= cols; i++) {
+					Object o = set.getObject(i);
+					String colName = colNames[i - 1];
+ 
+					bean.put(colName, o); 
+				}
+				cb.rowData(bean);
+				 
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (set != null)
+					set.close();
+			} catch (java.sql.SQLException ignore) {
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (java.sql.SQLException ignore) { // ignore it
+			}
+			 
+		} 
+	}
+	public   int updateSql( String sql) throws Exception {
+		// Log.debug("DataSql.updateSql:"+sql);
+		 
+		Statement stmt = null;
+		int count = 0;
+		try { 
+			stmt = conn.createStatement();
+			count = stmt.executeUpdate(sql);
+			 
+			return count;
+		} catch (Exception e) {			 
+			throw e;
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (java.sql.SQLException ignore) { // ignore it
+			}
+			
+		}
+	}
+
 }

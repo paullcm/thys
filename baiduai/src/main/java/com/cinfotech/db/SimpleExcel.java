@@ -16,15 +16,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.cinfotech.domain.Comments;
 import com.cinfotech.domain.Items;
 import com.cinfotech.domain.Pictures;
+import com.cinfotech.utils.ResourceUtils;
 
 public class SimpleExcel {
 	public static final String C_TIME_PATTON_DEFAULT = "yyyy-MM-dd HH:mm:ss";
 
 	public static final String C_TIME_PATTON_DEFAULT1 = "yyyy-MM-dd";
+	ResourceUtils res=ResourceUtils.getInstance();
     public void read() throws Exception{ 
     	   XSSFWorkbook book = new XSSFWorkbook("E:/works/神箭手/crawler-data-1982230-1530845146393.xlsx");
            SqlUtils sql=new SqlUtils();
-           sql.init("jdbc:mysql://192.168.21.201:3306/crawler?useUnicode=true&amp;characterEncoding=UTF-8", "root", "root");
+           sql.init(res.getUrl(),res.getUserName(), res.getPassword());
            XSSFSheet sheet = book.getSheetAt(0);
            int row = 1;
            
@@ -41,7 +43,7 @@ public class SimpleExcel {
 		        	   {
 			        	   String tmp =xlsrow.getCell(col++).getStringCellValue();
 			        	   item.setItemTime( new SimpleDateFormat(C_TIME_PATTON_DEFAULT).parse(tmp));
-		        	   }
+		        	   }	
 		        	   {
 			        	   String tmp =xlsrow.getCell(col++).getStringCellValue();
 			        	   item.setItemUrl(tmp);
@@ -232,7 +234,7 @@ public class SimpleExcel {
     	int idx=url.lastIndexOf("/");
     	if(idx>=0){
     		int eidx=url.indexOf(".",idx);
-    		if(idx>=0){
+    		if(eidx>=idx){
     			return url.substring(idx+1,eidx);
     		}
     	}
